@@ -1,11 +1,20 @@
 export const palette = {
   skyBlue: "#0EA5E9",
-  softBlue: "#AEE2FF",
   deepBlue: "#2E6385",
 
   white: "#FFFFFF",
   offWhite: "#F5F5F5",
   transparent: "rgba(255,255,255,0)",
+
+  softPink: "#F8D0E6",
+  softGreen: "#B4EEDF",
+  softBlue: "#AEE2FF",
+  softRed: "#FFDAD6",
+
+  hardBlue: "#2F647D",
+  hardGreen: "#30685C",
+  hardRed: "#BA1A1A",
+  hardPink: "#745568",
 
   inkDark: "#191C1E",
   inkMid: "#41484C",
@@ -32,7 +41,14 @@ export interface AppColors {
   surfaceWhite: string;
   buttonPrimaryBackground: string;
   buttonSecondaryBackground: string;
-  iconBackground: string;
+  iconBlueBackground: string;
+  iconGreenBackground: string;
+  iconRedBackground: string;
+  iconPinkBackground: string;
+  iconBlueColor: string;
+  iconGreenColor: string;
+  iconRedColor: string;
+  iconPinkColor: string;
   textPrimary: string;
   textSecondary: string;
   textHeading: string;
@@ -59,7 +75,14 @@ export const lightColors: AppColors = {
   surfaceWhite: palette.white,
   buttonPrimaryBackground: palette.skyBlue,
   buttonSecondaryBackground: palette.white,
-  iconBackground: palette.softBlue,
+  iconBlueBackground: palette.softBlue,
+  iconGreenBackground: palette.softGreen,
+  iconRedBackground: palette.softRed,
+  iconPinkBackground: palette.softPink,
+  iconBlueColor: palette.hardBlue,
+  iconGreenColor: palette.hardGreen,
+  iconRedColor: palette.hardRed,
+  iconPinkColor: palette.hardPink,
   textPrimary: palette.inkDark,
   textSecondary: palette.inkMid,
   textHeading: palette.inkLight,
