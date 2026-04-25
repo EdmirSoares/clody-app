@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { View, Text, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { ShadowView } from 'react-native-inner-shadow';
-import { CircularIcon } from '../CircularIconButton';
+import { CircularIcon } from '../CircularIcon';
 import { useTheme } from '../../hooks/useTheme';
 import { useFontScale } from '../../hooks/useFontScale';
 
