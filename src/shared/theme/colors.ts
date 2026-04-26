@@ -56,6 +56,7 @@ export interface AppColors {
   textButtonSecondary: string;
   borderSubtle: string;
   shadowCard: string;
+  shadowForecast: string;
   shadowCircle: string;
   shadowButtonPrimary: string;
   shadowButtonSecondary: string;
@@ -63,6 +64,7 @@ export interface AppColors {
   insetLightCard: string;
   insetDarkCircle: string;
   insetLightCircle: string;
+  insetDarkForecast: string;
   insetDarkButtonPrimary: string;
   insetLightButtonPrimary: string;
   insetDarkButtonSecondary: string;
@@ -90,6 +92,7 @@ export const lightColors: AppColors = {
   textButtonSecondary: palette.deepBlue,
   borderSubtle: "rgba(255, 255, 255, 0.40)",
   shadowCard: palette.shadowCard,
+  shadowForecast: 'rgba(174, 226, 255, 0.30)',
   shadowCircle: palette.shadowCircle,
   shadowButtonPrimary: palette.shadowPrimary,
   shadowButtonSecondary: palette.shadowSecondary,
@@ -97,6 +100,7 @@ export const lightColors: AppColors = {
   insetLightCard: palette.insetLightCard,
   insetDarkCircle: palette.insetDarkCircle,
   insetLightCircle: palette.insetLightCircle,
+  insetDarkForecast: 'rgba(47, 100, 125, 0.05)',
   insetDarkButtonPrimary: palette.insetDarkButtonPrimary,
   insetLightButtonPrimary: palette.insetLightButtonPrimary,
   insetDarkButtonSecondary: palette.insetDarkButtonSecondary,
