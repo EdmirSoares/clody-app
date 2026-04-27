@@ -1,9 +1,12 @@
 export const palette = {
   skyBlue: "#0EA5E9",
+  lightBlue: "#38BDF8",
+  mediumBlue: "#0284C7",
   deepBlue: "#2E6385",
 
   white: "#FFFFFF",
   offWhite: "#F5F5F5",
+  blueWhite: "#E0F2FE",
   transparent: "rgba(255,255,255,0)",
 
   softPink: "#F8D0E6",
@@ -37,8 +40,12 @@ export const palette = {
 
 export interface AppColors {
   screenBackground: string;
+  backgroundLightBlueWhite: string;
   cardBackground: string;
   surfaceWhite: string;
+  surfaceBlue: string;
+  surfaceMediumBlue: string;
+  surfaceLightBlue: string;
   buttonPrimaryBackground: string;
   buttonSecondaryBackground: string;
   iconBlueBackground: string;
@@ -73,8 +80,12 @@ export interface AppColors {
 
 export const lightColors: AppColors = {
   screenBackground: palette.offWhite,
+  backgroundLightBlueWhite: palette.blueWhite,
   cardBackground: palette.transparent,
   surfaceWhite: palette.white,
+  surfaceLightBlue: palette.lightBlue,
+  surfaceBlue: palette.skyBlue,
+  surfaceMediumBlue: palette.mediumBlue,
   buttonPrimaryBackground: palette.skyBlue,
   buttonSecondaryBackground: palette.white,
   iconBlueBackground: palette.softBlue,
@@ -91,8 +102,9 @@ export const lightColors: AppColors = {
   textButtonPrimary: palette.white,
   textButtonSecondary: palette.deepBlue,
   borderSubtle: "rgba(255, 255, 255, 0.40)",
+  
   shadowCard: palette.shadowCard,
-  shadowForecast: 'rgba(174, 226, 255, 0.30)',
+  shadowForecast: "rgba(174, 226, 255, 0.30)",
   shadowCircle: palette.shadowCircle,
   shadowButtonPrimary: palette.shadowPrimary,
   shadowButtonSecondary: palette.shadowSecondary,
@@ -100,7 +112,7 @@ export const lightColors: AppColors = {
   insetLightCard: palette.insetLightCard,
   insetDarkCircle: palette.insetDarkCircle,
   insetLightCircle: palette.insetLightCircle,
-  insetDarkForecast: 'rgba(47, 100, 125, 0.05)',
+  insetDarkForecast: "rgba(47, 100, 125, 0.05)",
   insetDarkButtonPrimary: palette.insetDarkButtonPrimary,
   insetLightButtonPrimary: palette.insetLightButtonPrimary,
   insetDarkButtonSecondary: palette.insetDarkButtonSecondary,

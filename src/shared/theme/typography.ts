@@ -8,6 +8,9 @@ export const baseFontSizes = {
   '3xl': 24,
   '4xl': 28,
   '5xl': 32,
+  '6xl': 40,
+  '7xl': 48,
+  '8xl': 64,
 } as const;
 
 export type FontSizeKey = keyof typeof baseFontSizes;
@@ -22,6 +25,9 @@ export const baseLineHeights: Record<FontSizeKey, number> = {
   '3xl': 32,
   '4xl': 36,
   '5xl': 40,
+  '6xl': 48,
+  '7xl': 56,
+  '8xl': 64,
 };
 
 export const fontFamilies = {
