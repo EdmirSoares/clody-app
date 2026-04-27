@@ -13,11 +13,18 @@ export const palette = {
   softGreen: "#B4EEDF",
   softBlue: "#AEE2FF",
   softRed: "#FFDAD6",
+  softYellow: "#FFF9C4",
+  softDarkBlue: "#88a7bbff",
+  softGray: "#e6e6e6ff",
+
 
   hardBlue: "#2F647D",
   hardGreen: "#30685C",
   hardRed: "#BA1A1A",
   hardPink: "#745568",
+  hardYellow: "#FBC02D",
+  hardDarkBlue: "#1f4862ff",
+  hardGray: "#9c9c9cff",
 
   inkDark: "#191C1E",
   inkMid: "#41484C",
@@ -102,7 +109,7 @@ export const lightColors: AppColors = {
   textButtonPrimary: palette.white,
   textButtonSecondary: palette.deepBlue,
   borderSubtle: "rgba(255, 255, 255, 0.40)",
-  
+
   shadowCard: palette.shadowCard,
   shadowForecast: "rgba(174, 226, 255, 0.30)",
   shadowCircle: palette.shadowCircle,
