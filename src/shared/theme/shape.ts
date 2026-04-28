@@ -1,5 +1,6 @@
 export const shape = {
   pill: 9999,
+  xxl: 72,
   xl: 64,
   card: 48,
   lg: 40,

@@ -32,8 +32,8 @@ export const palette = {
 
   shadowPrimary: "rgba(46, 99, 133, 0.20)",
   shadowSecondary: "rgba(0, 0, 0, 0.20)",
-  shadowCard: "rgba(222, 222, 222, 0.50)",
-  shadowCircle: "rgba(47, 100, 125, 0.15)",
+  shadowCard: "rgba(113, 153, 172, 0.25)",
+  shadowCircle: "rgba(113, 153, 172, 0.15)",
 
   insetDarkCard: "rgba(174, 226, 255, 0.20)",
   insetLightCard: "rgba(255, 255, 255, 0.80)",
