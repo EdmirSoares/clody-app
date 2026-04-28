@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCurrentWeather } from "../../../entities/weather/api/current-weather.api";
 import { getForecast } from "../../../entities/weather/api/forecast.api";
 import { getImageForCondition } from "@shared/utils";
+import { useLocationStore } from "@shared/store/useLocationStore";
 
 export const useHomeLogic = () => {
   const [location, setLocation] = useState<Location.LocationObject | null>(
@@ -11,6 +12,8 @@ export const useHomeLogic = () => {
   );
   const [address, setAddress] = useState<string>("");
   const [locationError, setLocationError] = useState<string | null>(null);
+
+  const setLocationStore = useLocationStore((s) => s.setLocation);
 
   const lat = location?.coords.latitude;
   const lon = location?.coords.longitude;
@@ -33,9 +36,15 @@ export const useHomeLogic = () => {
 
         if (geocode) {
           const regionStr = geocode.region ? `, ${geocode.region}` : "";
-          setAddress(
-            `${geocode.city || geocode.subregion || "Local"}${regionStr}`,
+          const cityLabel = `${geocode.city || geocode.subregion || "Local"}${regionStr}`;
+          setAddress(cityLabel);
+          setLocationStore(
+            loc.coords.latitude,
+            loc.coords.longitude,
+            cityLabel,
           );
+        } else {
+          setLocationStore(loc.coords.latitude, loc.coords.longitude, "");
         }
       } catch (e) {
         setLocationError("Falha ao obter localização.");
@@ -111,6 +120,7 @@ export const useHomeLogic = () => {
 
   return {
     locationError,
+    currentCondition,
     currentWeather: {
       temp: currentTemp,
       city: currentCity,

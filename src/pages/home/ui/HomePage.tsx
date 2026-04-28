@@ -18,6 +18,7 @@ import { useTheme } from "@shared/hooks/useTheme";
 import { shape } from "@shared/theme";
 import { useHomeLogic } from "../model/use-feature-logic";
 import { getSvgForCondition } from "@shared/utils/getSvgForCondition";
+import { getGradientForCondition } from "@shared/utils";
 import { useFontScale } from "@shared/hooks/useFontScale";
 import UmidityIcon from "@shared/assets/icons/weather/humidity-icon.svg";
 import TemperatureIcon from "@shared/assets/icons/weather/temperature-icon.svg";
@@ -33,9 +34,10 @@ export const HomePage = () => {
     isLoading,
     locationError,
     currentWeather,
+    currentCondition,
   } = useHomeLogic();
 
-  const dayColors = ["#E0F2FE", "#F7F9FB"] as const;
+  const { colors: gradientColors, isDark: isDarkGradient } = getGradientForCondition(currentCondition ?? "01d");
 
   if (isLoading) {
     return (
@@ -73,12 +75,12 @@ export const HomePage = () => {
 
   return (
     <LinearGradient
-      colors={dayColors}
+      colors={gradientColors}
       start={{ x: 0.5, y: 0 }}
       end={{ x: 0.5, y: 1 }}
       style={[
         styles.wrapper,
-        { paddingTop: insets.top, paddingBottom: insets.bottom },
+        { paddingTop: insets.top, paddingBottom: insets.bottom + 80 },
       ]}
     >
       <ScrollView
@@ -95,7 +97,7 @@ export const HomePage = () => {
             <Text
               style={[
                 styles.hugeTemperature,
-                { color: colors.surfaceMediumBlue, fontSize: fontSize["8xl"] },
+                { color: isDarkGradient ? colors.surfaceWhite : colors.surfaceMediumBlue, fontSize: fontSize["8xl"] },
               ]}
             >
               {currentWeather.temp}°
@@ -103,7 +105,7 @@ export const HomePage = () => {
             <Text
               style={[
                 styles.cityLocation,
-                { color: colors.textSecondary, fontSize: fontSize["3xl"] },
+                { color: isDarkGradient ? colors.surfaceWhite : colors.textSecondary, fontSize: fontSize["3xl"] },
               ]}
             >
               {currentWeather.city}
@@ -159,7 +161,7 @@ export const HomePage = () => {
           <Text
             style={[
               styles.sectionTitle,
-              { color: colors.textPrimary, fontSize: fontSize.xl },
+              { color: isDarkGradient ? colors.surfaceWhite : colors.textPrimary, fontSize: fontSize.xl },
             ]}
           >
             Hoje
