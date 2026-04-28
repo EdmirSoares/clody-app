@@ -20,7 +20,7 @@ export const SchedulePage = () => {
   const insets = useSafeAreaInsets();
   const { colors } = useTheme();
   const { fontSize } = useFontScale();
-  const { forecasts, isLoading, error, expandedId, toggleExpand } =
+  const { forecasts, isLoading, error, expandedId, toggleExpand, city } =
     useForecastLogic();
 
   const dayColors = ["#E0F2FE", "#F7F9FB"] as const;
@@ -36,12 +36,24 @@ export const SchedulePage = () => {
       ]}
     >
       <View style={styles.headerContainer}>
-        <Text style={[styles.title, { fontSize: fontSize["4xl"], color: colors.textPrimary }]}>
+        <Text
+          style={[
+            styles.title,
+            { fontSize: fontSize["4xl"], color: colors.textPrimary },
+          ]}
+        >
           Próximos dias
         </Text>
-        <Text style={[styles.subtitle, { fontSize: fontSize["lg"], color: colors.textSecondary }]}>
-          Aracaju.SE
-        </Text>
+        {city ? (
+          <Text
+            style={[
+              styles.subtitle,
+              { fontSize: fontSize["lg"], color: colors.textSecondary },
+            ]}
+          >
+            {city}
+          </Text>
+        ) : null}
       </View>
 
       {isLoading ? (

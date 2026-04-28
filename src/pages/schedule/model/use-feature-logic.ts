@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getForecast } from "../../../entities/weather/api/forecast.api";
 import { ForecastItem } from "../../../entities/weather/api/forecast.types";
+import { useLocationStore } from "@shared/store/useLocationStore";
 
 interface DailyForecast {
   id: string;
@@ -16,9 +17,7 @@ interface DailyForecast {
 export const useForecastLogic = () => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
-  // trocar pelas coords da home!!!
-  const lat = -10.9095;
-  const lon = -37.0748;
+  const { lat, lon, city, _hasHydrated } = useLocationStore();
 
 
   const groupForecastByDay = (items: ForecastItem[]): DailyForecast[] => {
@@ -141,23 +140,22 @@ export const useForecastLogic = () => {
     return result.slice(0, 6);
   };
 
+  const queryEnabled = _hasHydrated && !!lat && !!lon;
+
   const { data, isLoading, error } = useQuery({
-    queryKey: ["forecast", lat, lon],
+    queryKey: ["forecast-grouped", lat, lon],
     queryFn: async () => {
       try {
-        const res = await getForecast({ lat, lon });
-        console.log(
-          "Previsão recebida! (Terminal logs):",
-          res.list.length,
-          "itens",
-        );
+        const res = await getForecast({ lat: lat!, lon: lon! });
         return groupForecastByDay(res.list);
       } catch (err: any) {
         console.warn("Erro na API:", err.message || err);
         throw err;
       }
     },
+    enabled: queryEnabled,
   });
+
 
   const toggleExpand = (id: string) => {
     setExpandedId((prev) => (prev === id ? null : id));
@@ -165,9 +163,10 @@ export const useForecastLogic = () => {
 
   return {
     forecasts: data || [],
-    isLoading,
+    isLoading: isLoading || !_hasHydrated,
     error,
     expandedId,
     toggleExpand,
+    city,
   };
 };
