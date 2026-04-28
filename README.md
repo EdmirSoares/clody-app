@@ -1,3 +1,6 @@
+<img width="1440" height="1024" alt="Thumnail" src="https://github.com/user-attachments/assets/b1ba5b2a-76a9-4fde-9947-85451d7995f3" />
+
+
 # Clody
 
 ![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
