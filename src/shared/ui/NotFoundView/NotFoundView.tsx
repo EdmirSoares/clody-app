@@ -16,8 +16,17 @@ export const NotFoundView = ({ query }: NotFoundViewProps) => {
   const { fontSize, lineHeight } = useFontScale();
 
   return (
-    <View style={styles.errorSection}>
-      <View style={styles.notFoundWrapper}>
+    <View
+      style={styles.errorSection}
+      accessible
+      accessibilityRole="none"
+      accessibilityLabel={`Cidade não encontrada. Não foi possível encontrar ${query}. Por favor, verifique a ortografia ou tente outra cidade.`}
+    >
+      <View
+        style={styles.notFoundWrapper}
+        accessibilityElementsHidden
+        importantForAccessibility="no-hide-descendants"
+      >
         <ShadowView
           inset
           backgroundColor={palette.blueWhite}
@@ -81,6 +90,8 @@ export const NotFoundView = ({ query }: NotFoundViewProps) => {
             lineHeight: lineHeight["3xl"],
           },
         ]}
+        accessibilityElementsHidden
+        importantForAccessibility="no"
       >
         Cidade não encontrada
       </Text>
@@ -93,6 +104,8 @@ export const NotFoundView = ({ query }: NotFoundViewProps) => {
             lineHeight: lineHeight.lg,
           },
         ]}
+        accessibilityElementsHidden
+        importantForAccessibility="no"
       >
         {`Não foi possível encontrar "${query}".\nPor favor, verifique a ortografia ou tente outra cidade.`}
       </Text>
