@@ -1,0 +1,1 @@
+export { RecentLocationCard } from "./RecentLocationCard";
