@@ -17,7 +17,7 @@
 
 Clody nasceu de uma pergunta simples: por que aplicativos de clima precisam ser tão carregados de informação, tão frios, tão técnicos?
 
-A proposta foi criar algo diferente — um app que você abre, entende o tempo em segundos, e sente que está olhando algo agradável. Para isso, o design segue o conceito de **claymorphism**: superfícies suaves, sombras leves, gradientes orgânicos e formas arredondadas que passam uma sensação de calma e conforto. O visual muda conforme o clima — céu claro, dias quentes, noites escuras e acolhedoras.
+A proposta foi criar algo diferente, um app que você abre, entende o tempo em segundos, e sente que está olhando algo agradável. Para isso, o design segue o conceito de **claymorphism**: superfícies suaves, sombras leves, gradientes orgânicos e formas arredondadas que passam uma sensação de calma e conforto. O visual muda conforme o clima, céu claro, dias quentes, noites escuras e acolhedoras.
 
 O resultado é um app que informa sem estressar.
 
@@ -51,9 +51,9 @@ A fonte de todos os dados climáticos. Utilizamos três endpoints:
 | `/data/2.5/weather` | Clima atual na tela inicial |
 | `/data/2.5/forecast` | Previsão por hora (próximas horas na home e gráficos na agenda) |
 | `/data/2.5/air_pollution` | Índice de qualidade do ar (AQI) e CO ao salvar uma cidade |
-| Geocoding API | Busca de cidades por nome |
+| `Geocoding API`| Busca de cidades por nome |
 
-Toda requisição passa por um cliente Axios centralizado que injeta automaticamente a API key, a unidade métrica (`metric`) e o idioma (`pt_br`). Isso garante que nenhuma tela precise se preocupar com esses detalhes — é uma configuração única, aplicada globalmente.
+Toda requisição passa por um cliente Axios centralizado que injeta automaticamente a API key, a unidade métrica (`metric`) e o idioma (`pt_br`). Isso garante que nenhuma tela precise se preocupar com esses detalhes, é uma configuração única, aplicada globalmente.
 
 ### TanStack Query (React Query)
 
@@ -73,7 +73,7 @@ O Drizzle foi escolhido por oferecer uma API type-safe e migrações versionadas
 
 ### Skia + Inner Shadow
 
-Para os efeitos visuais do claymorphism — sombras internas, superfícies com profundidade e cartões com aparência "tridimensional suave" — usamos `@shopify/react-native-skia` e `react-native-inner-shadow`. Bibliotecas nativas de renderização que garantem que o visual permaneça fluido independente do dispositivo.
+Para os efeitos visuais do claymorphism, sombras internas, superfícies com profundidade e cartões com aparência "tridimensional suave", usamos `@shopify/react-native-skia` e `react-native-inner-shadow`. Bibliotecas nativas de renderização que garantem que o visual permaneça fluido independente do dispositivo.
 
 ### Zod + React Hook Form
 
@@ -103,7 +103,7 @@ Com os dados em mãos, exibe:
 - Cards com umidade, velocidade do vento e sensação térmica
 - Lista horizontal com previsão para as próximas horas
 
-O gradiente de fundo muda conforme a condição climática — dia ensolarado tem tons quentes alaranjados, noite tem tons escuros azulados, chuva tem fundo sombrio.
+O gradiente de fundo muda conforme a condição climática, dia ensolarado tem tons quentes alaranjados, noite tem tons escuros azulados, chuva tem fundo sombrio.
 
 ### Busca
 
@@ -116,7 +116,28 @@ Ao selecionar uma cidade:
 
 ### Próximos dias (Agenda)
 
-Usa o endpoint de forecast para trazer previsão de até 5 dias. Os dados vêm em intervalos de 3 horas — o app agrupa por dia, calcula mínima e máxima, e escolhe o ícone mais frequente do dia para representá-lo. Cada card pode ser expandido para ver um gráfico com as temperaturas em horários específicos (8h, 12h, 18h, 22h).
+Usa o endpoint de forecast para trazer previsão de até 5 dias. Os dados vêm em intervalos de 3 horas, o app agrupa por dia, calcula mínima e máxima, e escolhe o ícone mais frequente do dia para representá-lo. Cada card pode ser expandido para ver um gráfico com as temperaturas em horários específicos (8h, 12h, 18h, 22h).
+
+---
+
+## Acessibilidade
+
+Clody foi construído com acessibilidade como parte do design, não como adição posterior. O objetivo é que o app funcione bem para o maior número possível de pessoas, incluindo quem usa leitores de tela como VoiceOver (iOS) e TalkBack (Android).
+
+### Tipografia escalável
+
+Todos os tamanhos de fonte no app passam pelo hook `useFontScale`, que calcula um fator de escala baseado na largura real da tela do dispositivo. A referência é 390px (iPhone 14), em telas menores o texto encolhe proporcionalmente, em telas maiores cresce, sempre dentro de limites seguros (mínimo 85%, máximo 120%).
+
+Isso significa que nenhum texto está com tamanho fixo no código, todos respondem ao dispositivo automaticamente.
+
+### Leitores de tela
+
+Componentes interativos e informativos usam as APIs de acessibilidade do React Native para comunicar sua função e conteúdo aos leitores de tela:
+
+- **`accessibilityRole`** — indica ao leitor de tela o tipo do elemento (`button`, `header`, `text`, etc.), para que ele possa comunicar a função corretamente ao usuário
+- **`accessibilityLabel`** — texto descritivo lido pelo leitor de tela no lugar do conteúdo visual. Em cards com múltiplas informações (cidade, temperatura, condição), o label consolida tudo em uma frase natural: *"São Paulo, BR, 24 graus"*
+- **`accessibilityHint`** — instrução sobre o que acontece ao interagir com o elemento: *"Toque para ver os detalhes desta cidade"*
+- **`accessibilityElementsHidden` / `importantForAccessibility`** — usado para ocultar elementos decorativos (ícones SVG, camadas de sombra) do fluxo do leitor de tela, evitando ruído desnecessário
 
 ---
 
@@ -166,7 +187,7 @@ npx expo run:android
 
 Clody started from a simple question: why do weather apps have to be so cluttered, so cold, so technical?
 
-The goal was to build something different — an app you open, understand the weather in seconds, and actually enjoy looking at. To achieve this, the design follows **claymorphism**: soft surfaces, gentle shadows, organic gradients, and rounded shapes that create a sense of calm and comfort. The visual adapts to the current weather, clear sky, warm days, dark and cozy nights.
+The goal was to build something different, an app you open, understand the weather in seconds, and actually enjoy looking at. To achieve this, the design follows **claymorphism**: soft surfaces, gentle shadows, organic gradients, and rounded shapes that create a sense of calm and comfort. The visual adapts to the current weather, clear sky, warm days, dark and cozy nights.
 
 The result is an app that informs without overwhelming.
 
@@ -200,9 +221,9 @@ The source for all weather data. Three endpoints are used:
 | `/data/2.5/weather` | Current weather on the home screen |
 | `/data/2.5/forecast` | Hourly forecast (next hours on home, charts on schedule) |
 | `/data/2.5/air_pollution` | AQI and CO index when saving a city |
-| Geocoding API | City search by name |
+| `Geocoding API` | City search by name |
 
-Every request goes through a centralized Axios client that automatically injects the API key, metric units, and Portuguese language. No screen needs to worry about those details — it's configured once, applied globally.
+Every request goes through a centralized Axios client that automatically injects the API key, metric units, and Portuguese language. No screen needs to worry about those details, it's configured once, applied globally.
 
 ### TanStack Query (React Query)
 
@@ -216,13 +237,13 @@ Lightweight global state. The main use is `useLocationStore`, which persists lat
 
 Problem: the user searches for a city, checks the weather, closes the app. Next time they open search, it would be annoying to type everything again.
 
-Solution: when a city is selected in search, we save it locally to SQLite using Drizzle ORM. The repository keeps at most 2 recent cities — when the limit is reached, the oldest is removed. If the city already exists, only the timestamp is updated.
+Solution: when a city is selected in search, we save it locally to SQLite using Drizzle ORM. The repository keeps at most 2 recent cities, when the limit is reached, the oldest is removed. If the city already exists, only the timestamp is updated.
 
 Drizzle was chosen for its type-safe API and versioned migrations, making the schema predictable and easy to evolve.
 
 ### Skia + Inner Shadow
 
-For the claymorphism visual effects — inner shadows, depth surfaces, and "softly three-dimensional" cards — we use `@shopify/react-native-skia` and `react-native-inner-shadow`. Native rendering libraries that keep the visuals smooth regardless of the device.
+For the claymorphism visual effects, inner shadows, depth surfaces, and "softly three-dimensional" cards, we use `@shopify/react-native-skia` and `react-native-inner-shadow`. Native rendering libraries that keep the visuals smooth regardless of the device.
 
 ### Zod + React Hook Form
 
@@ -252,7 +273,7 @@ With data in hand, it displays:
 - Cards with humidity, wind speed and feels-like temperature
 - A horizontal list with hourly forecast for the next few hours
 
-The background gradient changes with the weather condition — sunny day uses warm orange tones, night uses dark blue tones, rain uses a dark moody background.
+The background gradient changes with the weather condition, sunny day uses warm orange tones, night uses dark blue tones, rain uses a dark moody background.
 
 ### Search
 
@@ -266,6 +287,27 @@ When a city is selected:
 ### Schedule (Next Days)
 
 Uses the forecast endpoint to show up to 5 days ahead. Data comes in 3-hour intervals — the app groups by day, calculates min and max temperatures, and picks the most frequent icon of the day to represent it. Each card can be expanded to reveal a chart with temperatures at specific times (8h, 12h, 18h, 22h).
+
+---
+
+## Accessibility
+
+Clody was built with accessibility as part of the design, not as an afterthought. The goal is for the app to work well for as many people as possible, including those who use screen readers like VoiceOver (iOS) and TalkBack (Android).
+
+### Scalable typography
+
+Every font size in the app goes through the `useFontScale` hook, which calculates a scale factor based on the actual screen width of the device. The baseline is 390px (iPhone 14), on smaller screens text scales down proportionally, on larger screens it grows, always within safe bounds (minimum 85%, maximum 120%).
+
+This means no text in the codebase has a hardcoded fixed size, everything responds to the device automatically.
+
+### Screen readers
+
+Interactive and informational components use React Native's accessibility APIs to communicate their role and content to screen readers:
+
+- **`accessibilityRole`** — tells the screen reader what kind of element it is (`button`, `header`, `text`, etc.), so it can communicate the function correctly to the user
+- **`accessibilityLabel`** — descriptive text read by the screen reader instead of the visual content. In cards with multiple pieces of information (city, temperature, condition), the label consolidates everything into a natural sentence: *"São Paulo, BR, 24 degrees"*
+- **`accessibilityHint`** — instruction about what happens when the element is interacted with: *"Tap to see details for this city"*
+- **`accessibilityElementsHidden` / `importantForAccessibility`** — used to hide decorative elements (SVG icons, shadow layers) from the screen reader flow, avoiding unnecessary noise
 
 ---
 
