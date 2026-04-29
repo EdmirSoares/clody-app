@@ -45,6 +45,9 @@ export const ForecastCard = ({
 
   const screenWidth = Dimensions.get("window").width;
 
+  const a11yLabel = `${dayLabel}, ${weatherLabel}, máxima ${temperature.replace("°", " graus")}, mínima ${lowTemperature.replace("°", " graus")}`;
+  const a11yHint = isExpanded ? "Toque para recolher o gráfico" : "Toque para expandir o gráfico horário";
+
   return (
     <TouchableOpacity
       activeOpacity={0.9}
@@ -54,6 +57,11 @@ export const ForecastCard = ({
         { shadowColor: colors.shadowForecast },
         style,
       ]}
+      accessible={true}
+      accessibilityRole="button"
+      accessibilityLabel={a11yLabel}
+      accessibilityHint={a11yHint}
+      accessibilityState={{ expanded: isExpanded }}
     >
       <ShadowView
         inset={true}
@@ -139,7 +147,12 @@ export const ForecastCard = ({
           </View>
 
           {isExpanded && chartData.length > 0 && (
-            <View style={styles.chartContainer}>
+            <View
+              style={styles.chartContainer}
+              accessible={true}
+              accessibilityLabel={`Gráfico de temperatura por hora para ${dayLabel}`}
+              accessibilityElementsHidden={false}
+            >
               <LineChart
                 data={{
                   labels: chartData.map((d) => d.time),

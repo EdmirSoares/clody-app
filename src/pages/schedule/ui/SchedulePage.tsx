@@ -41,6 +41,7 @@ export const SchedulePage = () => {
             styles.title,
             { fontSize: fontSize["4xl"], color: colors.textPrimary },
           ]}
+          accessibilityRole="header"
         >
           Próximos dias
         </Text>
@@ -50,6 +51,8 @@ export const SchedulePage = () => {
               styles.subtitle,
               { fontSize: fontSize["lg"], color: colors.textSecondary },
             ]}
+            accessibilityRole="text"
+            accessibilityLabel={`Localização: ${city}`}
           >
             {city}
           </Text>
@@ -57,11 +60,24 @@ export const SchedulePage = () => {
       </View>
 
       {isLoading ? (
-        <View style={styles.centerContainer}>
-          <ActivityIndicator size="large" color={colors.surfaceMediumBlue} />
+        <View
+          style={styles.centerContainer}
+          accessible={true}
+          accessibilityLabel="Carregando previsão do tempo"
+        >
+          <ActivityIndicator
+            size="large"
+            color={colors.surfaceMediumBlue}
+            accessibilityLabel="Indicador de carregamento"
+          />
         </View>
       ) : error ? (
-        <View style={styles.centerContainer}>
+        <View
+          style={styles.centerContainer}
+          accessible={true}
+          accessibilityRole="alert"
+          accessibilityLabel="Erro ao carregar a previsão do tempo"
+        >
           <Text
             style={[
               styles.errorText,
@@ -78,6 +94,7 @@ export const SchedulePage = () => {
           contentContainerStyle={styles.listContent}
           ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
           showsVerticalScrollIndicator={false}
+          accessibilityLabel="Lista de previsão dos próximos dias"
           renderItem={({ item }) => {
             const meta = getLocalColoredIconMapping(item.iconName);
             return (
