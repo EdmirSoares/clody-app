@@ -49,8 +49,14 @@ export const HomePage = () => {
             alignItems: "center",
           },
         ]}
+        accessible={true}
+        accessibilityLabel="Carregando dados do clima"
       >
-        <ActivityIndicator size="large" color={colors.surfaceMediumBlue} />
+        <ActivityIndicator
+          size="large"
+          color={colors.surfaceMediumBlue}
+          accessibilityLabel="Indicador de carregamento"
+        />
         <Text style={{ marginTop: shape.sm, color: colors.textPrimary }}>
           Obtendo localização...
         </Text>
@@ -65,6 +71,9 @@ export const HomePage = () => {
           styles.wrapper,
           { justifyContent: "center", alignItems: "center", padding: 24 },
         ]}
+        accessible={true}
+        accessibilityRole="alert"
+        accessibilityLabel={`Erro: ${locationError}`}
       >
         <Text style={{ textAlign: "center", color: colors.iconRedColor }}>
           {locationError}
@@ -87,18 +96,31 @@ export const HomePage = () => {
         contentContainerStyle={styles.container}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.topSection}>
+        <View
+          style={styles.topSection}
+          accessible={true}
+          accessibilityLabel={`Condição climática atual: ${currentWeather.city}, ${currentWeather.temp} graus`}
+        >
           <Image
             source={currentWeather.conditionImage}
             style={{ width: width * 0.6, height: width * 0.6 }}
             resizeMode="contain"
+            accessible={true}
+            accessibilityLabel={`Ícone da condição climática atual em ${currentWeather.city}`}
+            accessibilityRole="image"
           />
-          <View style={styles.cityTempContainer}>
+          <View
+            style={styles.cityTempContainer}
+            accessible={true}
+            accessibilityLabel={`${currentWeather.city}, temperatura ${currentWeather.temp} graus`}
+          >
             <Text
               style={[
                 styles.hugeTemperature,
                 { color: isDarkGradient ? colors.surfaceWhite : colors.surfaceMediumBlue, fontSize: fontSize["8xl"] },
               ]}
+              accessibilityRole="text"
+              accessibilityLabel={`Temperatura atual: ${currentWeather.temp} graus`}
             >
               {currentWeather.temp}°
             </Text>
@@ -107,6 +129,8 @@ export const HomePage = () => {
                 styles.cityLocation,
                 { color: isDarkGradient ? colors.surfaceWhite : colors.textSecondary, fontSize: fontSize["3xl"] },
               ]}
+              accessibilityRole="text"
+              accessibilityLabel={`Localização: ${currentWeather.city}`}
             >
               {currentWeather.city}
             </Text>
@@ -126,6 +150,7 @@ export const HomePage = () => {
               iconBackgroundColor={colors.iconBlueBackground}
               label="Humidade"
               value={`${currentWeather.humidity}%`}
+              accessibilityLabel={`Humidade: ${currentWeather.humidity} porcento`}
             />
             <ShadowCard
               icon={
@@ -138,6 +163,7 @@ export const HomePage = () => {
               iconBackgroundColor={colors.iconGreenBackground}
               label="Vel. Ventos"
               value={`${currentWeather.windSpeed} km/h`}
+              accessibilityLabel={`Velocidade dos ventos: ${currentWeather.windSpeed} quilômetros por hora`}
             />
           </View>
 
@@ -153,16 +179,18 @@ export const HomePage = () => {
               iconBackgroundColor={colors.iconPinkBackground}
               label="Sensação térmica"
               value={`${currentWeather.feelsLike}°`}
+              accessibilityLabel={`Sensação térmica: ${currentWeather.feelsLike} graus`}
             />
           </View>
         </View>
 
-        <View style={styles.hojeSection}>
+        <View style={styles.hojeSection} accessibilityRole="summary">
           <Text
             style={[
               styles.sectionTitle,
               { color: isDarkGradient ? colors.surfaceWhite : colors.textPrimary, fontSize: fontSize.xl },
             ]}
+            accessibilityRole="header"
           >
             Hoje
           </Text>
@@ -172,6 +200,7 @@ export const HomePage = () => {
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item) => item.id}
             contentContainerStyle={styles.flatListContent}
+            accessibilityLabel="Previsão do tempo por hora"
             ItemSeparatorComponent={() => <View style={{ width: 12 }} />}
             renderItem={({ item }) => {
               return (
@@ -183,6 +212,7 @@ export const HomePage = () => {
                     size: 22,
                   })}
                   value={`${item.temp}°`}
+                  accessibilityLabel={`${item.label}: ${item.temp} graus`}
                 />
               );
             }}
