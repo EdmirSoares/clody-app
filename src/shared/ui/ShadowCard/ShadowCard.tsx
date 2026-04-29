@@ -11,14 +11,20 @@ interface ShadowCardProps {
   label: string;
   value: string;
   style?: StyleProp<ViewStyle>;
+  accessibilityLabel?: string;
 }
 
-export const ShadowCard = ({ icon, iconBackgroundColor, label, value, style }: ShadowCardProps) => {
+export const ShadowCard = ({ icon, iconBackgroundColor, label, value, style, accessibilityLabel }: ShadowCardProps) => {
   const { colors } = useTheme();
   const { fontSize, lineHeight } = useFontScale();
 
   return (
-    <View style={[styles.outerWrapper, { shadowColor: colors.shadowCard }, style]}>
+    <View
+      style={[styles.outerWrapper, { shadowColor: colors.shadowCard }, style]}
+      accessible={true}
+      accessibilityRole="text"
+      accessibilityLabel={accessibilityLabel ?? `${label}: ${value}`}
+    >
       <ShadowView
         inset={true}
         backgroundColor="#fff"

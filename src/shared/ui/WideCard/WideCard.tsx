@@ -11,14 +11,20 @@ interface WideCardProps {
   label: string;
   value: string;
   style?: StyleProp<ViewStyle>;
+  accessibilityLabel?: string;
 }
 
-export const WideCard = ({ icon, iconBackgroundColor, label, value, style }: WideCardProps) => {
+export const WideCard = ({ icon, iconBackgroundColor, label, value, style, accessibilityLabel }: WideCardProps) => {
   const { colors } = useTheme();
   const { fontSize, lineHeight } = useFontScale();
 
   return (
-    <View style={[styles.outerWrapper, { shadowColor: colors.shadowCard }, style]}>
+    <View
+      style={[styles.outerWrapper, { shadowColor: colors.shadowCard }, style]}
+      accessible={true}
+      accessibilityRole="text"
+      accessibilityLabel={accessibilityLabel ?? `${label}: ${value}`}
+    >
       <ShadowView
         inset={true}
         backgroundColor="#fff"

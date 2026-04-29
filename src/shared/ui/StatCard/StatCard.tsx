@@ -10,9 +10,10 @@ interface StatCardProps {
   icon: ReactNode;
   value: string;
   style?: StyleProp<ViewStyle>;
+  accessibilityLabel?: string;
 }
 
-export const StatCard = ({ label, icon, value, style }: StatCardProps) => {
+export const StatCard = ({ label, icon, value, style, accessibilityLabel }: StatCardProps) => {
   const { colors } = useTheme();
   const { fontSize, lineHeight } = useFontScale();
 
@@ -25,6 +26,9 @@ export const StatCard = ({ label, icon, value, style }: StatCardProps) => {
       shadowBlur={16}
       isReflectedLightEnabled={false}
       style={[styles.outerLight, style, { mixBlendMode: 'multiply' }]}
+      accessible={true}
+      accessibilityRole="text"
+      accessibilityLabel={accessibilityLabel ?? `${label}: ${value}`}
     >
       <ShadowView
         inset={true}
